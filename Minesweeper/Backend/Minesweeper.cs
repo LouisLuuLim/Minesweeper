@@ -1,17 +1,16 @@
-using System;
+using Minesweeper.Backend;
 
 namespace Minesweeper
 {
     public class Minesweeper
     {
-        private int[] _board;
         private int _mineCount;
-        
 
-        public Minesweeper(int boardSize)
+        private Board _board;
+
+        public Minesweeper(IGameDifficulty gameDifficulty)
         {
-
-            _board = new int[boardSize];
+            _board = new Board(gameDifficulty.Height, gameDifficulty.Width);
         }
     }
 }

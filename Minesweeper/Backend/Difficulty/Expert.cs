@@ -1,9 +1,9 @@
 ﻿namespace Minesweeper.Backend.Difficulty
 {
-    public class Expert : GameDifficulty
+    public class Expert : IGameDifficulty
     {
-        protected override int Mines => 99;
-        protected override int Width => 30;
-        protected override int Height => 16;
+        public int Mines => 99;
+        public int Width => 30;
+        public int Height => 16;
     }
 }
