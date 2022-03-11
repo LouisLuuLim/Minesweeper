@@ -1,5 +1,6 @@
-﻿using System;
-using System.Windows;
+﻿using Minesweeper.Backend.MinesInitiator;
+using System;
+using System.Linq;
 
 namespace Minesweeper.Backend
 {
@@ -31,20 +32,9 @@ namespace Minesweeper.Backend
             return tiles;
         }
 
-        public void InitializeMines(int x, int y, int minesCount)
+        public void InitializeMines(IMinesInitiator minesInitiator, int minesCount, Coordinate firstSelectedCoordinate)
         {
-            _tiles[y, x] = new MineTile();
-            minesCount--;
-
-            var randomGenerator = new Random();
-
-            for (int i = minesCount - 1; i >= 0; i--)
-            {
-                x = randomGenerator.Next(_width);
-                y = randomGenerator.Next(_height);
-
-                _tiles[y, x] = new MineTile();
-            }
+            minesInitiator.AddMines(_tiles, minesCount, firstSelectedCoordinate);
         }
     }
 }
