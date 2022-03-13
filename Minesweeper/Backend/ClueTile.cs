@@ -1,15 +1,17 @@
 ﻿namespace Minesweeper.Backend
 {
-    public class ClueTile
+    public class ClueTile : Tile
     {
         public int Value
         {
-            get;
+            get; private set;
         }
 
         public ClueTile(int value)
         {
             Value = value;
         }
+
+        public void Increment() => Value++;
     }
 }

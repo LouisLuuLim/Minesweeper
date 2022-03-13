@@ -4,6 +4,6 @@ namespace Minesweeper.Backend.MinesInitiator
 {
     public interface IMinesInitiator
     {
-        List<Coordinate> AddMines(Tile[,] tiles, int minesCount, Coordinate firstSelectedPoint);
+        List<Coordinate> AddMines(Tile[,] board, int minesCount, Coordinate firstSelectedPoint);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Minesweeper.Backend.MinesInitiator;
 using System;
-using System.Linq;
+using System.Collections.Generic;
+using static Minesweeper.Backend.Enums;
 
 namespace Minesweeper.Backend
 {
@@ -32,9 +33,30 @@ namespace Minesweeper.Backend
             return tiles;
         }
 
-        public void InitializeMines(IMinesInitiator minesInitiator, int minesCount, Coordinate firstSelectedCoordinate)
+        public List<Coordinate> InitializeMines(IMinesInitiator minesInitiator, int minesCount, Coordinate firstSelectedCoordinate)
         {
-            minesInitiator.AddMines(_tiles, minesCount, firstSelectedCoordinate);
+            return minesInitiator.AddMines(_tiles, minesCount, firstSelectedCoordinate);
+        }
+
+        public void SelectTile(Coordinate coordinate)
+        {
+            var tileSate = _tiles[coordinate.Y, coordinate.X].State;
+
+            if (tileSate == TileState.Closed || tileSate == TileState.MarkedAsClue)
+            {
+                return;
+            }
+
+            for (var x = Math.Max(0, coordinate.X - 1); x <= Math.Min(coordinate.X + 1, _width); x++)
+            {
+                for (var y = Math.Max(0, coordinate.Y - 1); y <= Math.Min(coordinate.Y + 1, _height); y++)
+                {
+                    if (x != coordinate.X && y != coordinate.Y)
+                    {
+                        _tiles[y, x].State = TileState.Closed;
+                    }
+                }
+            }
         }
     }
 }

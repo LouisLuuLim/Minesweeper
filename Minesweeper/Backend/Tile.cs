@@ -8,5 +8,10 @@ namespace Minesweeper
         {
             set; get;
         }
+
+        public Tile()
+        {
+            State = TileState.Open;
+        }
     }
 }
