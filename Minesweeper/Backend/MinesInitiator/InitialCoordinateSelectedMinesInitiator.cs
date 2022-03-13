@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Minesweeper.Backend.MinesInitiator
 {
-    public class MinesInitiator : IMinesInitiator
+    public class InitialCoordinateSelectedMinesInitiator : IMinesInitiator
     {
         public void AddMines(Tile[,] board, int minesCount, Coordinate firstSelectedPoint)
         {
@@ -27,11 +27,6 @@ namespace Minesweeper.Backend.MinesInitiator
 
                 board[mineCoordinate.Y, mineCoordinate.X] = new MineTile();
             }
-        }
-
-        private int GetIndexToRemove(int x, int width, int y, int height)
-        {
-            return x * --height + y * --width;
         }
 
         private Coordinate GetCoordinatesFromMineLocationCandidateIndex(int candidateIndex, int width, int height)
