@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Minesweeper.Backend.MinesInitiator
 {
     public class InitialCoordinateSelectedMinesInitiator : IMinesInitiator
     {
-        public void AddMines(Tile[,] board, int minesCount, Coordinate firstSelectedPoint)
+        public List<Coordinate>() AddMines(Tile[,] board, int minesCount, Coordinate firstSelectedPoint)
         {
+            var minesCoordinates = new List<Coordinate>();
             var boardHeight = board.Length;
             var boardWidth = board.GetLength(0);
             var maxIndex = boardHeight * boardWidth;
@@ -24,9 +26,11 @@ namespace Minesweeper.Backend.MinesInitiator
                 mineLocationCandidates.RemoveAt(nextCandidate);
 
                 var mineCoordinate = GetCoordinatesFromMineLocationCandidateIndex(nextMineIndex, boardWidth, boardHeight);
-
+                minesCoordinates.Add(mineCoordinate);
                 board[mineCoordinate.Y, mineCoordinate.X] = new MineTile();
             }
+
+            return minesCoordinates;
         }
 
         private Coordinate GetCoordinatesFromMineLocationCandidateIndex(int candidateIndex, int width, int height)
