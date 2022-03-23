@@ -4,6 +4,11 @@ namespace Minesweeper
 {
     public class Tile
     {
+        public int Value
+        {
+            get; protected set;
+        }
+
         public TileState State
         {
             set; get;

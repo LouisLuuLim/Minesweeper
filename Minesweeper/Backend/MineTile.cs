@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Minesweeper.Backend
+﻿namespace Minesweeper.Backend
 {
     public class MineTile : Tile
     {
+        public MineTile()
+        {
+            Value = -1;
+        }
     }
 }
