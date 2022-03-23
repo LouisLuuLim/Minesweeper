@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 namespace Minesweeper.Backend.TilesInitiator.CluesInitator
 {
-    class MinesNeighbourClueTilesInitiator : ICluesInitiator
+    public class MinesNeighbourClueTilesInitiator : ICluesInitiator
     {
         private const int ClueTileInitialValue = 1;
 
         public void AddClues(Tile[,] board, List<Coordinate> minesCoordinates)
         {
-            var boardHeight = board.Length;
-            var boardWidth = board.GetLength(0);
+            var boardHeight = board.Length - 1;
+            var boardWidth = board.GetLength(0) - 1;
 
             foreach (var mineCoordinate in minesCoordinates)
             {
@@ -18,8 +18,13 @@ namespace Minesweeper.Backend.TilesInitiator.CluesInitator
                 {
                     for (var y = Math.Max(0, mineCoordinate.Y - 1); y <= Math.Min(mineCoordinate.Y + 1, boardHeight); y++)
                     {
-                        if (x != mineCoordinate.X && y != mineCoordinate.Y)
+                        if (x != mineCoordinate.X || y != mineCoordinate.Y)
                         {
+                            if (board[y, x] is MineTile)
+                            {
+                                continue;
+                            }
+
                             if (board[y, x] is ClueTile clueTile)
                             {
                                 clueTile.Increment();

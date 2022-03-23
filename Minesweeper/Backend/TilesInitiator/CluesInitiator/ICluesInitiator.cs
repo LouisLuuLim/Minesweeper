@@ -2,7 +2,7 @@
 
 namespace Minesweeper.Backend.TilesInitiator.CluesInitator
 {
-    interface ICluesInitiator
+    public interface ICluesInitiator
     {
         void AddClues(Tile[,] board, List<Coordinate> minesCoordinates);
     }
