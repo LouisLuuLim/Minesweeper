@@ -6,7 +6,7 @@ namespace Minesweeper.Backend.MinesInitiator
 {
     public class InitialCoordinateSelectedMinesInitiator : IMinesInitiator
     {
-        public List<Coordinate>() AddMines(Tile[,] board, int minesCount, Coordinate firstSelectedPoint)
+        public List<Coordinate> AddMines(Tile[,] board, int minesCount, Coordinate firstSelectedPoint)
         {
             var minesCoordinates = new List<Coordinate>();
             var boardHeight = board.Length;
