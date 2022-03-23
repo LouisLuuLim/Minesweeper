@@ -41,11 +41,12 @@ namespace Minesweeper.Backend
         public void SelectTile(Coordinate coordinate)
         {
             var tileSate = _tiles[coordinate.Y, coordinate.X].State;
-
             if (tileSate == TileState.Closed || tileSate == TileState.MarkedAsClue)
             {
                 return;
             }
+
+            _tiles[coordinate.Y, coordinate.X].State = TileState.Closed;
 
             for (var x = Math.Max(0, coordinate.X - 1); x <= Math.Min(coordinate.X + 1, _width); x++)
             {
@@ -53,7 +54,7 @@ namespace Minesweeper.Backend
                 {
                     if (x != coordinate.X && y != coordinate.Y)
                     {
-                        _tiles[y, x].State = TileState.Closed;
+                        SelectTile(new Coordinate(x, y));
                     }
                 }
             }
