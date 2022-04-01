@@ -1,6 +1,7 @@
 ﻿using Minesweeper;
 using Minesweeper.Backend;
 using Minesweeper.Backend.Difficulty;
+using Minesweeper.Backend.MinesInitiator;
 using Minesweeper.Backend.TilesInitiator.CluesInitator;
 using NUnit.Framework;
 using System;
@@ -11,8 +12,6 @@ namespace MinesweeperTests.Backend.TilesInitiator.CluesInitiator
     [TestFixture]
     public class MinesNeighbourClueTilesInitiatorTest
     {
-
-
         [Test]
         public void Should_ReturnBoardWithMines_At_GivenLocation()
         {
@@ -20,9 +19,11 @@ namespace MinesweeperTests.Backend.TilesInitiator.CluesInitiator
             var easyDifficulty = new Easy();
             var board = CreateBoardInitialState(easyDifficulty.Height, easyDifficulty.Width);
             var minesLocation = CreateMinesCoordinates();
+            var boardMineInitiator = new InitialCoordinateSelectedMinesInitiator();
             var boardClueInitiator = new MinesNeighbourClueTilesInitiator();
 
             // Act
+            boardMineInitiator.AddMines(board, minesLocation.ToArray());
             boardClueInitiator.AddClues(board, minesLocation);
 
             // Assert

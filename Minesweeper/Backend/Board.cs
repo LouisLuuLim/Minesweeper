@@ -7,9 +7,9 @@ namespace Minesweeper.Backend
 {
     public class Board
     {
-        int _height;
-        int _width;
-        Tile[,] _tiles;
+        private int _height;
+        private int _width;
+        private Tile[,] _tiles;
 
         public Board(int height, int width)
         {
@@ -33,9 +33,9 @@ namespace Minesweeper.Backend
             return tiles;
         }
 
-        public List<Coordinate> InitializeMines(IMinesInitiator minesInitiator, int minesCount, Coordinate firstSelectedCoordinate)
+        public Coordinate[] InitializeMines(IMinesInitiator minesInitiator, int minesCount, Coordinate firstSelectedCoordinate)
         {
-            return minesInitiator.AddMines(_tiles, minesCount, firstSelectedCoordinate);
+            return minesInitiator.CreateMines(_tiles, minesCount, firstSelectedCoordinate);
         }
 
         public void SelectTile(Coordinate coordinate)
@@ -47,6 +47,10 @@ namespace Minesweeper.Backend
             }
 
             _tiles[coordinate.Y, coordinate.X].State = TileState.Closed;
+            if (_tiles[coordinate.Y, coordinate.X] is ClueTile)
+            {
+                return;
+            }
 
             for (var x = Math.Max(0, coordinate.X - 1); x <= Math.Min(coordinate.X + 1, _width); x++)
             {
